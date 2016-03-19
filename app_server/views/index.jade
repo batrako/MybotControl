@@ -5,7 +5,58 @@ block content
       .row
         .col-md-4.col-sm-6.col-xs-12
           .panel.panel-primary
-            .panel-heading Aldea Batrako
+            .panel-heading Aldea #{dataVillages[0].Aldea}
+            .panel-body
+              table
+                tr
+                  td
+                    img(src='/images/Gold_Storage11.png',width='80', height='80')
+                  td(style='width:80%')
+                    .progress
+                      .progress-bar.progress-bar-success(style='width: #{dataVillages[0].PctOro}%') #{dataVillages[0].Oro}
+                tr
+                  td
+                    img(src='/images/Elixir_Storage11.png',width='80', height='80')
+                  td
+                    .progress
+                      .progress-bar.progress-bar-success(style='width: #{dataVillages[0].PctElixir}%') #{dataVillages[0].Elixir}
+                tr
+                  td
+                    img(src='/images/Dark_Elixir_Storage6.png',width='80', height='80')
+                  td
+                    .progress
+                      .progress-bar.progress-bar-success(style='#{dataVillages[0].PctOscuro}%') #{dataVillages[0].Oscuro}
+              table
+                  tr
+                    td(style='width:20%')
+                      br
+                      img(src='/images/Builder.png',width='50', height='50')
+                      br
+                      .label.label-danger #{dataVillages[0].Constructores} Libres
+                    td(style='width:100%', align='center',valign='bottom')
+                      br
+                      center
+                      img(src='/images/Trophy.png',width='40', height='40')
+                      br
+                      .label.label-danger #{dataVillages[0].Copas}
+                    td(style='width:20%',align='right')
+                      br
+                      br
+                      img(src='/images/gems_big_icon.png',width='30', height='30')
+                      br
+                      .label.label-danger #{dataVillages[0].Gemas}
+                    
+            .panel-footer
+              case dataVillages[0].Status
+                when 1
+                  img(src='/images/start.jpg',width='30', height='30')
+                when 0
+                  img(src='/images/stop.jpg',width='30', height='30')
+                when 0
+                  img(src='/images/pause.jpg',width='30', height='30')
+        .col-md-4.col-sm-6.col-xs-12
+          .panel.panel-primary
+            .panel-heading Aldea JaggerM3ister
             .panel-body
               table
                 tr
@@ -26,19 +77,28 @@ block content
                   td
                     .progress
                       .progress-bar.progress-bar-success(style='width: 30%') 3.000
+              table
                   tr
-                    td
+                    td(style='width:20%')
                       br
-                      img(src='/images/builder.png',width='30', height='30')
-                      label 2
-                    td(align='right')
+                      img(src='/images/Builder.png',width='50', height='50')
+                      br
+                      .label.label-danger 2 Libres
+                    td(style='width:100%', align='center',valign='bottom')
+                      br
+                      center
+                      img(src='/images/Trophy.png',width='40', height='40')
+                      br
+                      .label.label-danger 800
+                    td(style='width:20%',align='right')
+                      br
                       br
                       img(src='/images/gems_big_icon.png',width='30', height='30')
-                    td
                       br
-                      label 780
-            .panel-foot 
-              p Running
+                      .label.label-danger 900
+                    
+            .panel-footer 
+               img(src='/images/pause.jpg',width='30', height='30')  
         .col-md-4.col-sm-6.col-xs-12
           .panel.panel-primary
             .panel-heading Aldea Sus
@@ -62,19 +122,28 @@ block content
                   td
                     .progress
                       .progress-bar.progress-bar-success(style='width: 30%') 3.000
+              table
                   tr
-                    td
+                    td(style='width:20%')
                       br
-                      img(src='/images/builder.png',width='30', height='30')
-                      label 2
-                    td(align='right')
+                      img(src='/images/Builder.png',width='50', height='50')
+                      br
+                      .label.label-danger 2 Libres
+                    td(style='width:100%', align='center',valign='bottom')
+                      br
+                      center
+                      img(src='/images/Trophy.png',width='40', height='40')
+                      br
+                      .label.label-danger 800
+                    td(style='width:20%',align='right')
+                      br
                       br
                       img(src='/images/gems_big_icon.png',width='30', height='30')
-                    td
                       br
-                      label 780
-            .panel-foot 
-              p Running
+                      .label.label-danger 900
+                    
+            .panel-footer 
+               img(src='/images/start.jpg',width='30', height='30')
         .col-md-4.col-sm-6.col-xs-12
           .panel.panel-primary
             .panel-heading Aldea Erik
@@ -98,52 +167,25 @@ block content
                   td
                     .progress
                       .progress-bar.progress-bar-success(style='width: 30%') 3.000
-                  tr
-                    td
-                      br
-                      img(src='/images/builder.png',width='30', height='30')
-                      label 2
-                    td(align='right')
-                      br
-                      img(src='/images/gems_big_icon.png',width='30', height='30')
-                    td
-                      br
-                      label 780
-            .panel-foot 
-              p Running
-        .col-md-4.col-sm-6.col-xs-12
-          .panel.panel-primary
-            .panel-heading Aldea MiniBat
-            .panel-body
               table
-                tr
-                  td
-                    img(src='/images/Gold_Storage11.png',width='80', height='80')
-                  td(style='width:80%')
-                    .progress
-                      .progress-bar.progress-bar-success(style='width: 80%') 8.000.000
-                tr
-                  td
-                    img(src='/images/Elixir_Storage11.png',width='80', height='80')
-                  td
-                    .progress
-                      .progress-bar.progress-bar-success(style='width: 100%') 10.000.000
-                tr
-                  td
-                    img(src='/images/Dark_Elixir_Storage6.png',width='80', height='80')
-                  td
-                    .progress
-                      .progress-bar.progress-bar-success(style='width: 30%') 3.000
                   tr
-                    td
+                    td(style='width:20%')
                       br
-                      img(src='/images/builder.png',width='30', height='30')
-                      label 2
-                    td(align='right')
+                      img(src='/images/Builder.png',width='50', height='50')
+                      br
+                      .label.label-danger 2 Libres
+                    td(style='width:100%', align='center',valign='bottom')
+                      br
+                      center
+                      img(src='/images/Trophy.png',width='40', height='40')
+                      br
+                      .label.label-danger 800
+                    td(style='width:20%',align='right')
+                      br
                       br
                       img(src='/images/gems_big_icon.png',width='30', height='30')
-                    td
                       br
-                      label 780
-            .panel-foot 
-              p Running
+                      .label.label-danger 900
+                    
+            .panel-footer 
+               img(src='/images/stop.jpg',width='30', height='30')
