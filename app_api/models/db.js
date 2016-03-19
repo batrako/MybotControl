@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+require('./villages.js');
 
 var dbURI = 'mongodb://localhost/MyBotControl';
 

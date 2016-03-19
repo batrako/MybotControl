@@ -14,4 +14,4 @@ var villageSchema = new mongoose.Schema({
     Status: {type: Number, min:0, max:2}, 
 });
 
-mongoose.model('Village', villageSchema);
+mongoose.model('Village', villageSchema)
