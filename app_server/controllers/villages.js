@@ -1,57 +1,38 @@
+var request = require("request");
+var apiOptions={
+    server: "http://localhost:8080"
+};
+if (process.env.NODE_ENV=='production'){
+    apiOptions.server="http://batrako.no-ip.org:3000";
+};
+
+var renderHomepage=function(req, res, responseBody){
+    res.render('index', { 
+        title: 'Lista de Aldeas',
+        dataVillages: responseBody
+});    
+}
 /* GET 'homelist' page */
 module.exports.homelist = function(req, res){
-res.render('index', { 
-    title: 'Lista de Aldeas',
-    dataVillages: [{
-        Aldea: "Batrako",
-        Oro: 8000000,
-        PctOro: 93,
-        Elixir: 7000000,
-        PctElixir:85, 
-        Oscuro: 90000,
-        PctOscuro: 60, 
-        Constructores: 0,
-        Copas: 860,
-        Gemas: 980, 
-        Status: 1
-    },{
-        Aldea: "JaggerM3ister",
-        Oro: 8000000,
-        PctOro: 93,
-        Elixir: 7000000,
-        PctElixir:85, 
-        Oscuro: 90000,
-        PctOscuro: 60, 
-        Constructores: 0,
-        Copas: 860,
-        Gemas: 980, 
-        Status: 0
-    },{
-        Aldea: "Sus",
-        Oro: 8000000,
-        PctOro: 93,
-        Elixir: 7000000,
-        PctElixir:85, 
-        Oscuro: 90000,
-        PctOscuro: 60, 
-        Constructores: 0,
-        Copas: 860,
-        Gemas: 980, 
-        Status: 1
-    },{
-        Aldea: "Erik",
-        Oro: 8000000,
-        PctOro: 93,
-        Elixir: 7000000,
-        PctElixir:85, 
-        Oscuro: 90000,
-        PctOscuro: 60, 
-        Constructores: 0,
-        Copas: 860,
-        Gemas: 980, 
-        Status: 2
-    }]
-});
+    var requestOptions, path;
+    path="/api/villages";
+    requestOptions={
+        url: apiOptions.server+path,
+        method: "GET",
+        json: {}
+    };
+    request(
+        requestOptions,
+        function(err, response,body){
+            if (err) {
+                console.log(err);
+            } else if (response.statusCode === 200) {
+                renderHomepage(req,res,body);
+            } else {
+                console.log(response.statusCode);
+            }
+        }
+        );
 };
 
 /* GET 'homelist' page */
