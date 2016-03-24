@@ -18,7 +18,10 @@ module.exports.villagesCreate = function (req, res) {
         Constructores: req.body.Constructores,
         Copas: req.body.Copas,
         Gemas: req.body.Gemas, 
-        Status: req.body.Status
+        Status: req.body.Status,
+	OroXhora: req.body.OroXhora,
+	ElixirXhora: req.body.ElixirXhora,
+	OscuroXhora: req.body.OscuroXhora
     }, function(err,village){
         if (err){
             sendJsonResponse(res,400,err);
@@ -79,7 +82,7 @@ module.exports.villagesUpdateOne = function (req, res) {
     Vill
         .findOne({Aldea: req.params.villageid})
         .exec(function(err, village) {
-            if (!village || village==""){
+            if (!village || village=="" || village.Aldea != req.body.Aldea){
                 sendJsonResponse(res, 404, {
                     "message": "Aldea no encontrada"
                 });
@@ -99,6 +102,10 @@ module.exports.villagesUpdateOne = function (req, res) {
             village.Copas= req.body.Copas;
             village.Gemas= req.body.Gemas; 
             village.Status= req.body.Status;
+	    village.Timestamp= req.body.Timestamp;
+	    village.OroXhora= req.body.OroXhora;
+	    village.ElixirXhora= req.body.ElixirXhora;
+	    village.OscuroXhora= req.body.OscuroXhora;
             village.save(function(err,village){
                 if(err){
                     sendJsonResponse(res,404,err);

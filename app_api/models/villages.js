@@ -12,6 +12,10 @@ var villageSchema = new mongoose.Schema({
     Copas: Number,
     Gemas: Number, 
     Status: {type: Number, min:0, max:2}, 
+    Timestamp: String,
+    OroXhora: String, 
+    ElixirXhora: String,
+    OscuroXhora: String
 });
 
 mongoose.model('Village', villageSchema)
