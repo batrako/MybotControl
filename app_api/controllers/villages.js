@@ -1,5 +1,8 @@
 var mongoose =  require('mongoose');
 var Vill = mongoose.model('Village');
+var pushbulletAPI = require('pushbullet');
+var pusher = new pushbulletAPI('o.zk4UDmSiSTBLwCYOhS7CoQHd4cCWIQT2');
+
 
 var sendJsonResponse = function(res, status, content) {
     res.status(status);
@@ -18,7 +21,11 @@ module.exports.villagesCreate = function (req, res) {
         Constructores: req.body.Constructores,
         Copas: req.body.Copas,
         Gemas: req.body.Gemas, 
-        Status: req.body.Status
+        Status: req.body.Status, 
+        Timestamp: req.body.Timestamp, 
+        OroXhora: req.body.OroXhora,
+        ElixirXhora: req.body.ElixirXhora,
+        OscuroXhora: req.body.OscuroXhora
     }, function(err,village){
         if (err){
             sendJsonResponse(res,400,err);
@@ -79,7 +86,7 @@ module.exports.villagesUpdateOne = function (req, res) {
     Vill
         .findOne({Aldea: req.params.villageid})
         .exec(function(err, village) {
-            if (!village || village==""){
+            if (!village || village=="" || village.Aldea != req.body.Aldea){
                 sendJsonResponse(res, 404, {
                     "message": "Aldea no encontrada"
                 });
@@ -99,6 +106,10 @@ module.exports.villagesUpdateOne = function (req, res) {
             village.Copas= req.body.Copas;
             village.Gemas= req.body.Gemas; 
             village.Status= req.body.Status;
+            village.Timestamp=req.body.Timestamp;
+            village.OroXhora= req.body.OroXhora;
+            village.ElixirXhora= req.body.ElixirXhora;
+            village.OscuroXhora= req.body.OscuroXhora;
             village.save(function(err,village){
                 if(err){
                     sendJsonResponse(res,404,err);
@@ -142,3 +153,68 @@ module.exports.villagesDeleteOne = function (req, res) {
       });
   }   
 };
+
+module.exports.pushbulletPause = function (req, res) {
+    // pusher.devices(function(error,respuesta) {
+    //	sendJsonResponse(res, 200, respuesta);
+    //});
+  if (req.params && req.params.villageid) {
+        pushbulletAction(res, req.params.villageid,"pause");
+  }
+};
+
+module.exports.pushbulletResume = function (req, res) {
+    // pusher.devices(function(error,respuesta) {
+    //	sendJsonResponse(res, 200, respuesta);
+    //});
+  if (req.params && req.params.villageid) {
+      Vill
+        .findOne({Aldea: req.params.villageid})
+        .exec(function(err, village) {
+            if (!village || village==""){
+                sendJsonResponse(res, 404, {
+                    "message": "Aldea no encontrada"
+                });
+                return;
+            } else if(err){
+                sendJsonResponse(res,404,err);
+                return;
+            }
+            var Mensaje="BOT " + req.params.villageid + " resume";
+            console.log(Mensaje);
+            pusher.note({}, 'MyBotControl', Mensaje , function(error, respuesta) {
+                if (error) {
+                    sendJsonResponse(res,400,error);
+                } else {
+                    sendJsonResponse(res, 200, respuesta);        
+                }
+            
+        });
+        });
+  }
+};
+
+var pushbulletAction=function(res, aldea,accion ){
+    var Mensaje="BOT " + aldea + " "+accion;
+    Vill
+        .findOne({Aldea: aldea})
+        .exec(function(err, village) {
+            if (!village || village==""){
+                sendJsonResponse(res, 404, {
+                    "message": "Aldea no encontrada"
+                });
+                return;
+            } else if(err){
+                sendJsonResponse(res,400,err);
+                return;
+            }
+        console.log(Mensaje);
+        pusher.note({}, 'MyBotControl', Mensaje , function(error, respuesta) {
+            if (error) {
+                sendJsonResponse(res,400,error);
+            } else {
+                sendJsonResponse(res, 200, respuesta);        
+            }
+        });
+    });
+}
