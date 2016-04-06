@@ -6,10 +6,9 @@ if (process.env.NODE_ENV=='production'){
     apiOptions.server="http://batrako.no-ip.org:3000";
 };
 
-var renderHomepage=function(req, res, responseBody){
+var renderHomepage=function(req, res){
     res.render('index', { 
-        title: 'Lista de Aldeas',
-        dataVillages: responseBody
+        title: 'Lista de Aldeas'
 });    
 }
 /* GET 'homelist' page */
@@ -37,5 +36,6 @@ module.exports.homelist = function(req, res){
 
 /* GET 'homelist' page */
 module.exports.villageInfo = function(req, res){
-res.render('index', { title: 'Administración de Aldea' });
+    renderHomepage(req,res);
+    //res.render('index', { title: 'Administración de Aldea' });
 };
