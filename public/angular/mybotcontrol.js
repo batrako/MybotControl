@@ -38,12 +38,11 @@ var villageListCtrl= function($scope,villageData,$http,$interval){
             success(function (data) {
                 $scope.data.dataVillages = data;
             });
-        console.log("refresco");
     };
     
     $scope.reload();
     
-    $interval($scope.reload, 5000);
+    $interval($scope.reload, 20000);
     
 };
 
