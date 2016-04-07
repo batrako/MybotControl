@@ -39,10 +39,10 @@ block content
                     img(src='/images/Dark_Elixir_Storage6.png',width='80', height='80')
                   td
                     .progress
-                      .progress-bar.progress-bar-success(style='width: {{Aldea.PctOscuro}}')
+                      .progress-bar.progress-bar-success(style='width: {{Aldea.PctOscuro}}%')
                     .label.label-default(vertical-align: top) {{Aldea.Oscuro}}
                     &#32;
-                    .label.label-success(vertical-align: top) {{Aldea.OroXhora}}
+                    .label.label-success(vertical-align: top) {{Aldea.OscuroXhora}}
               table
                   tr
                     td(style='width:20%')
@@ -68,9 +68,9 @@ block content
                 tr
                   td(ng-if="Aldea.Status === 1", style='width:100%')
                     img(src='/images/start.jpg',width='30', height='30')
-                  td(ng-if="Aldea.Status === 2", style='width:100%') 
-                    img(src='/images/stop.jpg',width='30', height='30')
                   td(ng-if="Aldea.Status === 0", style='width:100%') 
+                    img(src='/images/stop.jpg',width='30', height='30')
+                  td(ng-if="Aldea.Status === 2", style='width:100%') 
                     img(src='/images/pause.jpg',width='30', height='30')
                   td(align='center',style='padding: 3px')
                     span
@@ -84,6 +84,6 @@ block content
                           .glyphicon.glyphicon-pause
                   td(align='center',style='padding: 3px')
                     span
-                      .button.btn-sm.btn-danger.disabled
+                      .button.btn-sm.btn-danger(ng-click="restart(Aldea.Aldea)")
                         span
-                          .glyphicon.glyphicon-stop
+                          .glyphicon.glyphicon-retweet

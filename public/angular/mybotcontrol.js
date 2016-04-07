@@ -9,20 +9,29 @@ var villageListCtrl= function($scope,villageData,$http,$interval){
         });
         
     $scope.start = function(aldea){
-        var url='/api/pushbullet/'+aldea+'/resume';
-        console.log(url);
-        $http.get(url)
-            .success(function(data) {
-                console.log(data);   
-            })
-            .error(function(data){
-                console.log('Error:' + data);
-            });
+        bootbox.confirm("Se va  enviar orden al Robot para <b> INICIAR </b> la Aldea <b><font color=green>"+aldea+"</font></b> ¿ Estás Seguro ?", function(result) {
+                if (result==true) {
+                    sendPushBulletAction(aldea,'RESUME',$http);    
+                }
+        }); 
     };
     
     $scope.pause = function(aldea){
-        sendPushBulletAction(aldea,'pause',$http);
+         bootbox.confirm("Se va a enviar orden al Robot para poner en <b> PAUSA </b> la Aldea <b><font color=green>"+aldea+"</font></b> ¿ Estás Seguro ?", function(result) {
+                if (result==true) {
+                    sendPushBulletAction(aldea,'PAUSE',$http);    
+                }
+        }); 
     };
+    
+    $scope.restart = function(aldea){
+        bootbox.confirm("Se va a enviar orden al Robot para <b> PARAR y ARRANCAR de cero</b> la Aldea <b><font color=green>"+aldea+"</font></b> ¿ Estás Seguro ?", function(result) {
+                if (result==true) {
+                    sendPushBulletAction(aldea,'RESTART',$http);    
+                }
+        }); 
+    };
+    
     
     $scope.reload = function () {
         $http.get('/api/villages').
@@ -48,10 +57,10 @@ function sendPushBulletAction(aldea, accion,$http){
         console.log(url);
         $http.get(url)
             .success(function(data) {
-                console.log(data);   
+                bootbox.alert("Orden enviada correctamente. Puede tardar varios segundos en ejecutarse");
             })
             .error(function(data){
-                console.log('Error:' + data);
+                bootbox.alert("Error al enviar la orden al Robot:" + data);
             });    
 }
 
