@@ -8,7 +8,8 @@ if (process.env.NODE_ENV=='production'){
 
 var renderHomepage=function(req, res){
     res.render('index', { 
-        title: 'Lista de Aldeas'
+        title: 'Lista de Aldeas',
+        user: req.user
 });    
 }
 /* GET 'homelist' page */

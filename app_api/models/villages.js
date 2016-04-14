@@ -18,4 +18,4 @@ var villageSchema = new mongoose.Schema({
     OscuroXhora: String
 });
 
-mongoose.model('Village', villageSchema)
+mongoose.model('Village', villageSchema);
