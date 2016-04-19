@@ -12,6 +12,28 @@ var renderHomepage=function(req, res){
         user: req.user
 });    
 }
+
+
+var renderLogin=function(req,res){
+    res.render('login', { 
+        title: 'Login',
+        user: req.user
+});    
+}
+
+
+/* GET login page */
+
+module.exports.login=function(req,res){
+    if (req.user){
+        res.redirect('/village');
+    }
+    else {
+        renderLogin(req,res);    
+    }
+    
+}
+
 /* GET 'homelist' page */
 module.exports.homelist = function(req, res){
     var requestOptions, path;

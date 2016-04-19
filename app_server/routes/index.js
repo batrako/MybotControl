@@ -5,7 +5,7 @@ var ctrlOthers = require('../controllers/others');
 var passport=require('passport');
 
 /* Villages Pagees */
-router.get('/', ctrlVillages.homelist);
+router.get('/', ctrlVillages.login);
 router.get('/village',ctrlVillages.villageInfo);
 
 /* Other pages */
@@ -15,7 +15,7 @@ router.get('/about',ctrlOthers.about);
 router.get('/auth/facebook', passport.authenticate('facebook',{ scope: [ 'email' ] }));
 
 router.get('/auth/facebook/callback', passport.authenticate('facebook',
-  { successRedirect: '/', 
+  { successRedirect: '/village', 
     failureRedirect: '/about' }));
 
 
